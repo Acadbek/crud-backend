@@ -3,13 +3,15 @@ const mongodb = require('mongoose');
 const Product = require('./models/productSchema')
 const app = express();
 const cors = require('cors')
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
 
 app.get('/', (req, res) => {
-	res.send('hello thinkland')
+	res.send('hello')
 })
-app.use(cors())
+
 app.get('/products', async (req, res) => {
 	try {
 		const product = await Product.find();
@@ -72,10 +74,10 @@ app.delete('/products/:id', async (req, res) => {
 })
 
 mongodb.set('strictQuery', false);
-const PORT = process.env.PORT || 8083
+const PORT = process.env.PORT || 4444;
 mongodb.connect('mongodb+srv://asadbek:parametr@crud.cglkqhx.mongodb.net/Node-Api?retryWrites=true&w=majority')
 	.then(() => {
-		console.log('conncet to mongo');
+		console.log('connected to mongodb');
 		app.listen(PORT, () => {
 			console.log(`server is running ${PORT}`);
 		})
