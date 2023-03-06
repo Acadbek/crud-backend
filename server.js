@@ -2,14 +2,14 @@ const express = require('express');
 const mongodb = require('mongoose');
 const Product = require('./models/productSchema')
 const app = express();
-
+const cors = require('cors')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
   res.send('hello thinkland')
 })
-
+app.use(cors())
 app.get('/products', async (req, res) => {
   try {
     const product = await Product.find();
